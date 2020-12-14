@@ -1,9 +1,10 @@
 import xlrd as xl #to access the data from excel workbook
+from Velo_yaw_from_accel_yawrate import velocity, yaw, get_x_y_list, show_path
 #import xlswriter as xlw #to write the data in excel workbook
 
 # ------------------------------ Loading the excel file ----------------------------------------------#
 #name of the file to be accessed
-path = 'work_to_home_raw_data_trial.xlsx'
+path = 'work_to_home_raw_data.xlsx'
 
 #accessing the workbook itself
 inputworkbook = xl.open_workbook(path)
@@ -65,12 +66,20 @@ for time_stamp,values in timestamp_dict.items():
     timestamp.append(time_stamp/1000) #converting timestamps into seconds with 1000
     accel.append(sum(timestamp_dict[time_stamp]['accel'])/len(timestamp_dict[time_stamp]['accel']))
     gyro.append(sum(timestamp_dict[time_stamp]['gyro'])/len(timestamp_dict[time_stamp]['gyro']))
-print('timestamp : {}'.format(timestamp))
+#print('timestamp : {}'.format(timestamp))
 #print('timestamp : {}'.format(timestamp))
 #print('accel : {}'.format(accel))
 #print('gyro : {}'.format(gyro))
 #print(len(timestamp))
-#print(len(accel))
+print(len(accel))
 #print(len(gyro))
 
-# ------------------------ using timestamp and accel data to create velo list -----------------------#
+# ------------------------ using timestamp and accel data to create 2D trajectory -----------------------#
+
+true_velocity = velocity(accel,timestamp)
+print(len(true_velocity))
+true_yaw = yaw(gyro,timestamp)
+print(len(true_yaw))
+true_x_y_points = get_x_y_list(true_velocity,true_yaw, timestamp)
+show_path(true_x_y_points)
+

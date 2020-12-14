@@ -1,4 +1,5 @@
 from math import cos,sin
+import matplotlib.pyplot as plt
 
 def velocity(accel_list,timestamp):
     
@@ -12,7 +13,7 @@ def velocity(accel_list,timestamp):
     """
 
     #checking if both timestamp and accel_list have the same length
-    if len(accel_list != timestamp):
+    if len(accel_list) != len(timestamp):
         raise Exception("Acceleration and timestamp list length has to be same!")
 
     velocity = [] #defining an empty velocity list
@@ -20,7 +21,7 @@ def velocity(accel_list,timestamp):
     for i in range(1,len(accel_list)):
         delta_time = timestamp[i]-timestamp[i-1] #calculating difference between consecutive timestamp
         velo_at_i += accel_list[i]*delta_time #calculating area under the graph for dt element
-        velo.append(velo_at_i) #adding that to the velocity list - area under the dt - velocity at dt
+        velocity.append(velo_at_i) #adding that to the velocity list - area under the dt - velocity at dt
 
     return velocity
 
@@ -36,10 +37,10 @@ def yaw(gyro_list,timestamp):
     """
 
     #checking if both timestamp and gyro_list(yaw_rate) have the same length
-    if len(gyro_list != timestamp):
+    if len(gyro_list) != len(timestamp):
         raise Exception("Gyro and timestamp list length has to be same!")
 
-    yaw = [0] #defining an empty yaw list
+    yaw = [] #defining an empty velocity list
     yaw_at_i = 0 #defining yaw_at_i for the loop
     for i in range(1,len(gyro_list)):
         delta_time = timestamp[i]-timestamp[i-1] #calculating difference between consecutive timestamp
@@ -48,7 +49,7 @@ def yaw(gyro_list,timestamp):
 
     return yaw
 
-def get_x_y_list(velcity,yaw,timestamp):
+def get_x_y_list(velo,yaw,timestamp):
 
     """
     goal : creating list of x,y points using list of velocity and yaw
@@ -62,19 +63,20 @@ def get_x_y_list(velcity,yaw,timestamp):
     y = 0
     x_y_list = [(x,y)]
     time = timestamp[1:]
-    #check if three lists have the same length
 
-    if len(velocity)!=len(yaw) or len(yaw)!=len(timestamp)-1 or len(timestamp)-1 != len(velocity):
-        raise Exception("yaw, velcoty list length has to be same and timestamp 1 len longer than the other two!")
 
-    print(len(velocity))
+    print(len(velo))
     print(len(yaw))
     print(len(timestamp))
 
+    #check if three lists have the same length
+    if len(velo)!=len(yaw) or len(yaw)!=len(timestamp)-1 or len(timestamp)-1 != len(velo):
+        raise Exception("yaw, velcoty list length has to be same and timestamp 1 len longer than the other two!")
+
     for i in range(1,len(time)):
         delta_t = time[i]-time[i-1]
-        x += cos(yaw[i])*(velocity[i]*delta_t)
-        y += sin(yaw[i])*(velocity[i]*delta_t)
+        x += cos(yaw[i])*(velo[i]*delta_t)
+        y += sin(yaw[i])*(velo[i]*delta_t)
         x_y_list.append((x,y))
     return x_y_list
 

@@ -66,6 +66,11 @@ for time_stamp,values in timestamp_dict.items():
     accel.append(sum(timestamp_dict[time_stamp]['accel'])/len(timestamp_dict[time_stamp]['accel']))
     gyro.append(sum(timestamp_dict[time_stamp]['gyro'])/len(timestamp_dict[time_stamp]['gyro']))
 print('timestamp : {}'.format(timestamp))
-#print(len(timestamp))
+#print('timestamp : {}'.format(timestamp))
 #print('accel : {}'.format(accel))
 #print('gyro : {}'.format(gyro))
+#print(len(timestamp))
+#print(len(accel))
+#print(len(gyro))
+
+# ------------------------ using timestamp and accel data to create velo list -----------------------#

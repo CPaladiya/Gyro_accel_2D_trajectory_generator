@@ -26,18 +26,18 @@ X=worksheet.ncols  #number of cols from A,B, to .. in Excel file
 timestamp_raw = [] #to collect first column as a time stamp list
 accel_raw = [] #collect second column as a accel data list
 gyro_raw = [] #collect third column as gyro data list
-accel_adjust = 0.11
-gyro_adjust = 0.008
+accel_adjust = 0.001 # offset to mask the sensor error, please adjust accordingly, general range (0.01 to 0.12)
+gyro_adjust = 0.0065 # offset to mask the sensor error, please adjust accordingly, general range (0.005 to 0.030)
 
 for i in range(1,Y):
     #creating a list of timestamp using the raw data available in the first column
     timestamp_raw.append(float(worksheet.cell_value(i,0)))
     #creating a list of accel_meter data available in the second column
     #regardless of numeric data type of excel data, here it would be stored as float
-    accel_raw.append(float(worksheet.cell_value(i,1)) + accel_adjust) #0.1 is an offset to mask the sensor error, adjust accordingly
+    accel_raw.append(float(worksheet.cell_value(i,1)) + accel_adjust)
     #creating a list of gyro data available in the third column
     #regardless of numeric data type of excel data, here it would be stored as float
-    gyro_raw.append(float(worksheet.cell_value(i,2)) - gyro_adjust) #-0.004 is an offset to mask the sensor error, adjust accordingly
+    gyro_raw.append(float(worksheet.cell_value(i,2)) - gyro_adjust) 
 #print(len(timestamp_raw))
 #print(len(accel_raw))
 #print(len(gyro_raw))

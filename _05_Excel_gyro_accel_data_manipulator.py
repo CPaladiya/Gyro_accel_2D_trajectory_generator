@@ -4,7 +4,7 @@ from Velo_yaw_from_accel_yawrate import velocity, yaw, get_x_y_list, show_path
 
 # ------------------------------ Loading the excel file ----------------------------------------------#
 #name of the file to be accessed
-path = 'work_to_home_raw_data.xlsx'
+path = 'Loop2.xlsx'
 
 #accessing the workbook itself
 inputworkbook = xl.open_workbook(path)
@@ -26,16 +26,18 @@ X=worksheet.ncols  #number of cols from A,B, to .. in Excel file
 timestamp_raw = [] #to collect first column as a time stamp list
 accel_raw = [] #collect second column as a accel data list
 gyro_raw = [] #collect third column as gyro data list
+accel_adjust = 0.11
+gyro_adjust = 0.008
 
 for i in range(1,Y):
     #creating a list of timestamp using the raw data available in the first column
     timestamp_raw.append(float(worksheet.cell_value(i,0)))
     #creating a list of accel_meter data available in the second column
     #regardless of numeric data type of excel data, here it would be stored as float
-    accel_raw.append(float(worksheet.cell_value(i,1))) 
+    accel_raw.append(float(worksheet.cell_value(i,1)) + accel_adjust) #0.1 is an offset to mask the sensor error, adjust accordingly
     #creating a list of gyro data available in the third column
     #regardless of numeric data type of excel data, here it would be stored as float
-    gyro_raw.append(float(worksheet.cell_value(i,2))) 
+    gyro_raw.append(float(worksheet.cell_value(i,2)) - gyro_adjust) #-0.004 is an offset to mask the sensor error, adjust accordingly
 #print(len(timestamp_raw))
 #print(len(accel_raw))
 #print(len(gyro_raw))
@@ -71,15 +73,15 @@ for time_stamp,values in timestamp_dict.items():
 #print('accel : {}'.format(accel))
 #print('gyro : {}'.format(gyro))
 #print(len(timestamp))
-print(len(accel))
+#print(len(accel))
 #print(len(gyro))
 
 # ------------------------ using timestamp and accel data to create 2D trajectory -----------------------#
 
 true_velocity = velocity(accel,timestamp)
-print(len(true_velocity))
+#print(len(true_velocity))
 true_yaw = yaw(gyro,timestamp)
-print(len(true_yaw))
+#print(len(true_yaw))
 true_x_y_points = get_x_y_list(true_velocity,true_yaw, timestamp)
 show_path(true_x_y_points)
 

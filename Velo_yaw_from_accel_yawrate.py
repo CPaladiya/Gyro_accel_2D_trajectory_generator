@@ -65,9 +65,9 @@ def get_x_y_list(velo,yaw,timestamp):
     time = timestamp[1:]
 
 
-    print(len(velo))
-    print(len(yaw))
-    print(len(timestamp))
+    #print(len(velo))
+    #print(len(yaw))
+    #print(len(timestamp))
 
     #check if three lists have the same length
     if len(velo)!=len(yaw) or len(yaw)!=len(timestamp)-1 or len(timestamp)-1 != len(velo):

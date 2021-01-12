@@ -4,7 +4,7 @@ from Velo_yaw_from_accel_yawrate import velocity, yaw, get_x_y_list, show_path
 
 # ------------------------------ Loading the excel file ----------------------------------------------#
 #name of the file to be accessed
-path = 'Loop2.xlsx'
+path = 'Loop1.xlsx'
 
 #accessing the workbook itself
 inputworkbook = xl.open_workbook(path)
@@ -23,59 +23,25 @@ X=worksheet.ncols  #number of cols from A,B, to .. in Excel file
 
 # ------------------------- collecting raw timestamp, accel and gyro data --------------------------------- #
 
-timestamp_raw = [] #to collect first column as a time stamp list
-accel_raw = [] #collect second column as a accel data list
-gyro_raw = [] #collect third column as gyro data list
+timestamp = [] #to collect first column as a time stamp list
+accel = [] #collect second column as a accel data list
+gyro = [] #collect third column as gyro data list
 # step1 : straighten the graph by adjusting gyro_adjust, then adjust accel_adjust
 accel_adjust = 0.001 # offset to mask the sensor error, please adjust accordingly
 gyro_adjust = 0.0065 # offset to mask the sensor error, please adjust accordingly
 
 for i in range(1,Y):
     #creating a list of timestamp using the raw data available in the first column
-    timestamp_raw.append(float(worksheet.cell_value(i,0)))
+    timestamp.append(float((worksheet.cell_value(i,0))/1000))
     #creating a list of accel_meter data available in the second column
     #regardless of numeric data type of excel data, here it would be stored as float
-    accel_raw.append(float(worksheet.cell_value(i,1)) + accel_adjust)
+    accel.append(float(worksheet.cell_value(i,1)) + accel_adjust)
     #creating a list of gyro data available in the third column
     #regardless of numeric data type of excel data, here it would be stored as float
-    gyro_raw.append(float(worksheet.cell_value(i,2)) - gyro_adjust) 
+    gyro.append(float(worksheet.cell_value(i,2)) - gyro_adjust) 
 #print(len(timestamp_raw))
 #print(len(accel_raw))
 #print(len(gyro_raw))
-
-# ------------------------- making a dict to collect data for unique timestamp --------------------------------- #
-
-#there are multiple accel and gyro data for same timestamp, so creating dict to create data for unique timestamp
-#example - {123456 : {'accel':[0.23,0.4,0.2], 'gyro':[0.45,0.2,0.4]}}
-
-timestamp_dict = dict()
-for i,time_stamp in enumerate(timestamp_raw):
-    #to do - check if the entry is in the dict
-    if time_stamp not in timestamp_dict:
-        timestamp_dict[time_stamp] = {'accel':[accel_raw[i]], 'gyro':[gyro_raw[i]]}
-    else:
-        timestamp_dict[time_stamp]['accel'].append(accel_raw[i])
-        timestamp_dict[time_stamp]['gyro'].append(gyro_raw[i])
-#print('timestamp_dict : {}'.format(timestamp_dict))
-
-# ------------------------ making useful list of unique timestamps and relevant accel, gyro data -----------------------#
-
-timestamp = [] #unit seconds
-accel = [] #unit meter per second squred
-gyro = [] #rad per second
-
-#condensing list of accel and gyro to a single avg of the list
-for time_stamp,values in timestamp_dict.items():
-    timestamp.append(time_stamp/1000) #converting timestamps into seconds with 1000
-    accel.append(sum(timestamp_dict[time_stamp]['accel'])/len(timestamp_dict[time_stamp]['accel']))
-    gyro.append(sum(timestamp_dict[time_stamp]['gyro'])/len(timestamp_dict[time_stamp]['gyro']))
-#print('timestamp : {}'.format(timestamp))
-#print('timestamp : {}'.format(timestamp))
-#print('accel : {}'.format(accel))
-#print('gyro : {}'.format(gyro))
-#print(len(timestamp))
-#print(len(accel))
-#print(len(gyro))
 
 # ------------------------ using timestamp and accel data to create 2D trajectory -----------------------#
 

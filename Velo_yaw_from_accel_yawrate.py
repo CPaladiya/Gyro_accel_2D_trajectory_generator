@@ -95,22 +95,25 @@ def show_path(x_y_list):
     X=[p[0] for p in x_y_list]
     Y=[p[1] for p in x_y_list]
     
-    fig, ax = plt.subplots()
-    ax1 = fig.add_subplot(1,1,1)
+    #setting up the main figure, axis, and plotting the elements we want to animate
+    fig = plt.figure()
+    ax = plt.axes(xlim = (-1.5,1.5), ylim = (-1.5,1.5))
+    plt.xlabel("Meters")
+    plt.ylabel("Meters")
+    plt.title("2D Trajectory Visualizer using Accelerometer and Gyro data.")
+    line, = ax.plot([],[], 'r-')
     
+    #initializing function : plotting the backgoround for each frame
+    def init():
+        line.set_data([],[])
+        return line,
+    
+    #animation function
     def animate(i):
-        xs = []
-        ys = []
-        for i in range(len(X)):
-            xs.append(X[i])
-            ys.append(Y[i])
-        ax1.clear()
-        ax1.plot(xs,ys,'r-')
-        
-    ani = animation.FuncAnimation(
-        fig, animate, interval = 1)
+        line.set_data(X[i],Y[i])
+        return line,
     
-    #plt.scatter(X,Y) #showing the basic scatter plot
+    #calling the animator blit = true - only draw the part of the graph that has changed
     
+    anim = animation.FuncAnimation(fig,animate,init_func=init, frames = 200, interval = 20, blit = True)
     plt.show()
-    return

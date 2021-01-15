@@ -1,5 +1,6 @@
 from math import cos,sin
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation #This class would help me make the animation
 
 def velocity(accel_list,timestamp):
     
@@ -94,7 +95,22 @@ def show_path(x_y_list):
     X=[p[0] for p in x_y_list]
     Y=[p[1] for p in x_y_list]
     
-    plt.scatter(X,Y) #showing the basic scatter plot
-    plt.plot(X,Y)
+    fig, ax = plt.subplots()
+    ax1 = fig.add_subplot(1,1,1)
+    
+    def animate(i):
+        xs = []
+        ys = []
+        for i in range(len(X)):
+            xs.append(X[i])
+            ys.append(Y[i])
+        ax1.clear()
+        ax1.plot(xs,ys,'r-')
+        
+    ani = animation.FuncAnimation(
+        fig, animate, interval = 1)
+    
+    #plt.scatter(X,Y) #showing the basic scatter plot
+    
     plt.show()
     return

@@ -1,6 +1,7 @@
 from math import cos,sin
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation #This class would help me make the animation
+import numpy as np
 
 def velocity(accel_list,timestamp):
     
@@ -97,23 +98,22 @@ def show_path(x_y_list):
     
     #setting up the main figure, axis, and plotting the elements we want to animate
     fig = plt.figure()
-    ax = plt.axes(xlim = (-1.5,1.5), ylim = (-1.5,1.5))
+    ax = plt.subplot(111)
+    ax.set(xlim=((min(X)-0.1),(max(X)+0.1)), ylim = ((min(Y)-0.1),(max(Y)+0.1)))
     plt.xlabel("Meters")
     plt.ylabel("Meters")
     plt.title("2D Trajectory Visualizer using Accelerometer and Gyro data.")
-    line, = ax.plot([],[], 'r-')
     
-    #initializing function : plotting the backgoround for each frame
-    def init():
-        line.set_data([],[])
-        return line,
+    sct = ax.scatter(x=X[0], y=Y[0])
     
     #animation function
     def animate(i):
-        line.set_data(X[i],Y[i])
-        return line,
+        x = X[:i]
+        y = Y[:i]
+        sct.set_offsets(np.c_[x,y])
+        return sct,
     
     #calling the animator blit = true - only draw the part of the graph that has changed
     
-    anim = animation.FuncAnimation(fig,animate,init_func=init, frames = 200, interval = 20, blit = True)
+    anim = animation.FuncAnimation(fig,animate,frames = len(Y), interval = 2, blit = True)
     plt.show()

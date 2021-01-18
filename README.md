@@ -1,6 +1,10 @@
 # 05_Gyro_accel_2D_trajectory_generator
 Program to generate 2D path trajectory using Accelerometer and Gyroscope data.
 
+## Files
+- `_05_Excel_gyro_accel_data_manipulator.py` - It reads data from your provided excel file and generates the 2D trajectory path - *Run this file to see trajectory graph*
+- `Velo_yaw_from_accel_yawrate` - Contains all the functions to generate and animate trajectory graph.
+
 ## Prerequisites
 - Install [xlrd](https://pypi.org/project/xlrd/) python library
 - Set path to your desired excel file on [Line-7](https://github.com/CPaladiya/05_Gyro_accel_2D_trajectory_generator/blob/de149134f0a75f889b87a045ae6b956c389257aa/_05_Excel_gyro_accel_data_manipulator.py#L7) within `_05_Excel_gyro_accel_data_manipulator.py`

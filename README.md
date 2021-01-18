@@ -22,7 +22,7 @@ Program to generate 2D path trajectory using Accelerometer and Gyroscope data.
 ## If you are using - 6 DOF+ IMU Sensor/Accelerometer
 - Only two component is required for plotting 2D trajectory
 - Correlate your usage of sensor with the image below
-- Choose two appropreate components, one linear and one angular accel. component
+- Choose two appropreate components (one linear and one angular accel.)
 
 ![details](https://user-images.githubusercontent.com/74514429/104868378-2e3d0880-5911-11eb-9e35-123900ffe457.png)
 

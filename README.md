@@ -20,5 +20,5 @@ Program to generate 2D path trajectory using Accelerometer and Gyroscope data.
 - Correlate your usage of sensor with the image below
 - Choose two appropreate components, one liner and one angular accel. component
 
-![details](https://user-images.githubusercontent.com/74514429/104867562-1e242980-590f-11eb-9cdb-ea743a35929a.png)
+![details](https://user-images.githubusercontent.com/74514429/104868378-2e3d0880-5911-11eb-9e35-123900ffe457.png)
 

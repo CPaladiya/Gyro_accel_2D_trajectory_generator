@@ -13,7 +13,7 @@ Program to generate 2D path trajectory using Accelerometer and Gyroscope data.
 ![xls_details](https://user-images.githubusercontent.com/74514429/104867531-119fd100-590f-11eb-8eaf-4bd419284b7a.png)
 
 ### Calibration
-- Modify offset `(Default offset = 0)` to accomodate sensor error or calibrate acceleration data on [line 30/line 31]((https://github.com/CPaladiya/05_Gyro_accel_2D_trajectory_generator/blob/de149134f0a75f889b87a045ae6b956c389257aa/_05_Excel_gyro_accel_data_manipulator.py#L30-L31)) within `_05_Excel_gyro_accel_data_manipulator.py`
+- Modify offset `(Default offset = 0)` to accomodate sensor error or calibrate acceleration data on [Line 30/Line 31](https://github.com/CPaladiya/05_Gyro_accel_2D_trajectory_generator/blob/de149134f0a75f889b87a045ae6b956c389257aa/_05_Excel_gyro_accel_data_manipulator.py#L30-L31) within `_05_Excel_gyro_accel_data_manipulator.py`
 
 ## If you are using - 6 DOF+ IMU Sensor/Accelerometer
 - Only two component is required for plotting 2D trajectory

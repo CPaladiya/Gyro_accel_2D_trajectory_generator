@@ -8,7 +8,7 @@ Program to generate 2D path trajectory using Accelerometer and Gyroscope data.
 - Units for Timestamp - *milliseconds*, Linear accel. - *m/s<sup>2*, Gyroscopic accel. (Anglular accel.) - *rad/s<sup>2*
 
 ## Example of xls file
-- Code gathers data starting from the cell `A2`, `B2` and `C2`
+- Code collects data starting from the cell `A2`, `B2` and `C2`
 
 ![xls_details](https://user-images.githubusercontent.com/74514429/104867531-119fd100-590f-11eb-8eaf-4bd419284b7a.png)
 

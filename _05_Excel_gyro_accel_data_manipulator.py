@@ -27,18 +27,18 @@ timestamp = [] #to collect first column as a time stamp list
 accel = [] #collect second column as a accel data list
 gyro = [] #collect third column as gyro data list
 # step1 : straighten the graph by adjusting gyro_adjust, then adjust accel_adjust
-accel_adjust = 0 # offset to mask the sensor error, please adjust accordingly
-gyro_adjust = 0 # offset to mask the sensor error, please adjust accordingly
+accel_offset = 0 # offset to mask the sensor error, please adjust accordingly
+gyro_offset = 0 # offset to mask the sensor error, please adjust accordingly
 
 for i in range(1,Y):
     #creating a list of timestamp using the raw data available in the first column
     timestamp.append(float((worksheet.cell_value(i,0))/1000))
     #creating a list of accel_meter data available in the second column
     #regardless of numeric data type of excel data, here it would be stored as float
-    accel.append(float(worksheet.cell_value(i,1)) + accel_adjust)
+    accel.append(float(worksheet.cell_value(i,1)) + accel_offset)
     #creating a list of gyro data available in the third column
     #regardless of numeric data type of excel data, here it would be stored as float
-    gyro.append(float(worksheet.cell_value(i,2)) + gyro_adjust) 
+    gyro.append(float(worksheet.cell_value(i,2)) + gyro_offset) 
 #print(len(timestamp_raw))
 #print(len(accel_raw))
 #print(len(gyro_raw))

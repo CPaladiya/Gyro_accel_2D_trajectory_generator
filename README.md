@@ -8,7 +8,7 @@ Program to generate 2D path trajectory using Accelerometer and Gyroscope data.
 ## Prerequisites
 - Install [xlrd](https://pypi.org/project/xlrd/) python library
 - Set path to your desired excel file on [Line-7](https://github.com/CPaladiya/05_Gyro_accel_2D_trajectory_generator/blob/de149134f0a75f889b87a045ae6b956c389257aa/_05_Excel_gyro_accel_data_manipulator.py#L7) within `_05_Excel_gyro_accel_data_manipulator.py`
-- Make sure to save Excel file as `.xls` file (Save As Excel 97-2003 Workbook)
+- Required Excel file extension : `.xls` (Save As Excel 97-2003 Workbook to convert to `.xls` from `.xlsx`)
 - Units for Timestamp - *milliseconds*, Linear accel. - *m/s<sup>2*, Gyroscopic accel. (Anglular accel.) - *rad/s<sup>2*
 
 ## Example of xls file
